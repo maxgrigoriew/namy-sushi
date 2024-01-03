@@ -10,5 +10,7 @@ module.exports = {
   },
   extends: ['@nuxtjs', 'plugin:nuxt/recommended', 'prettier'],
   plugins: [],
-  rules: {},
+  rules: {
+    'no-console': 'error',
+  },
 }

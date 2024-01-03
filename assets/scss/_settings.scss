@@ -1,0 +1,67 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--light);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--blue-middle);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue-middle) #fff;
+}
+
+.list-reset {
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+body {
+  margin: 0;
+  font-family: var(--neucha);
+  color: var(--black);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0.8px;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 var(--container-offset);
+  max-width: var(--container-width);
+}

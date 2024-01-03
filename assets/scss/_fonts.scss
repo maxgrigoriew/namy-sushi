@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Neucha', cursive, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Neucha'), url('../fonts/Neucha.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: local('Montserrat'), url('../fonts/Montserrat.ttf') format('ttf');
+}
