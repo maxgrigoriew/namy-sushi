@@ -13,3 +13,11 @@
   font-weight: 500;
   src: local('Montserrat'), url('../fonts/Montserrat.ttf') format('ttf');
 }
+
+@font-face {
+  font-family: 'Ubuntu', sans-serif;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+  src: local('Ubuntu'), url('../fonts/Ubuntu-Light.ttf') format('ttf');
+}

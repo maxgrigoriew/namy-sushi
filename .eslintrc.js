@@ -11,6 +11,7 @@ module.exports = {
   extends: ['@nuxtjs', 'plugin:nuxt/recommended', 'prettier'],
   plugins: [],
   rules: {
-    'no-console': 'error',
+    'no-console': 'off',
+    'vue/no-unused-vars': 'warn',
   },
 }

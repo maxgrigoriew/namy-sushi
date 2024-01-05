@@ -11,9 +11,13 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    isDark: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: 'click',
-  setup(props, { slots, emit }) {
+  setup(props, { slots }) {
     const showIcon = computed(() => !!slots.icon)
     onMounted(() => {})
     return {
@@ -29,6 +33,7 @@ export default defineComponent({
       { circle: showIcon },
       { 'btn--large': isLarge },
       { 'btn--rectangle': isRectangle },
+      { 'btn--dark': isDark },
     ]"
     @click="$emit('click')"
   >
@@ -51,6 +56,7 @@ export default defineComponent({
   font-family: inherit;
   font-size: 16px;
   transition: all var(--transition);
+  white-space: nowrap;
 
   &:hover {
     background-color: var(--brown);
@@ -75,6 +81,11 @@ export default defineComponent({
       background-color: var(--light);
       color: var(--brown);
     }
+  }
+
+  &--dark {
+    color: var(--light);
+    background-color: var(--brown);
   }
 }
 

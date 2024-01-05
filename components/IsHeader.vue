@@ -1,6 +1,14 @@
-<script></script>
+<script>
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  emits: 'click',
+
+  setup(_, { emit }) {},
+})
+</script>
 <template>
-  <header class="header">
+  <header id="header" class="header">
     <div class="container">
       <div class="header__inner">
         <a href="#" class="header__logo">
@@ -45,7 +53,7 @@
         >
 
         <div class="header__buttons">
-          <is-button>
+          <is-button @click="$emit('openModal')">
             <template v-slot:icon>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

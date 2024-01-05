@@ -1,0 +1,34 @@
+<script>
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {}
+  },
+})
+</script>
+<template>
+  <is-button is-dark class="scroll-btn">
+    <template v-slot:icon>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="25"
+        viewBox="0 0 25 25"
+        fill="none"
+      >
+        <path
+          d="M11.5245 5.55519L0.399387 16.6805C0.141869 16.9378 0 17.2813 0 17.6476C0 18.0138 0.141869 18.3573 0.399387 18.6146L1.21849 19.4339C1.75222 19.9671 2.61969 19.9671 3.15262 19.4339L12.4948 10.0917L21.8474 19.4443C22.1049 19.7016 22.4482 19.8437 22.8142 19.8437C23.1807 19.8437 23.524 19.7016 23.7817 19.4443L24.6006 18.625C24.8581 18.3675 25 18.0242 25 17.6579C25 17.2917 24.8581 16.9482 24.6006 16.6909L13.4653 5.55519C13.207 5.29726 12.8621 5.1556 12.4954 5.15641C12.1273 5.1556 11.7826 5.29726 11.5245 5.55519Z"
+          fill="white"
+        />
+      </svg>
+    </template>
+  </is-button>
+</template>
+<style lang="scss">
+.scroll-btn {
+  position: fixed;
+  right: 10%;
+  bottom: 160px;
+}
+</style>

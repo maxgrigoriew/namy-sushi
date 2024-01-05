@@ -27,7 +27,7 @@ export default {
 }
 </script>
 <template>
-  <li class="product-item">
+  <li class="product-item" :class="{ active: count > 0 }">
     <div class="product-item__img">
       <img src="./../assets/images/product-1.png" alt="" />
     </div>
@@ -100,19 +100,20 @@ export default {
   transition: all var(--transition);
   cursor: default;
 
-  // &:hover {
-  //   background-color: var(--brown);
+  &.active {
+    background-color: var(--brown);
 
-  //   .product-item__title,
-  //   .product-item__text,
-  //   .product-item__weight,
-  //   .product-item__price {
-  //     color: var(--light);
-  //   }
-  //   .product-item__img img {
-  //     filter: drop-shadow(15px 12px 20px rgba(203, 182, 137, 0.7));
-  //   }
-  // }
+    .product-item__title,
+    .product-item__text,
+    .product-item__weight,
+    .product-item__count,
+    .product-item__price {
+      color: var(--light);
+    }
+    .product-item__img img {
+      filter: drop-shadow(15px 12px 20px rgba(203, 182, 137, 0.7));
+    }
+  }
 
   &__img {
     position: relative;

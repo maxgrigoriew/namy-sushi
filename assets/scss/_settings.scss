@@ -65,3 +65,12 @@ body {
   padding: 0 var(--container-offset);
   max-width: var(--container-width);
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
