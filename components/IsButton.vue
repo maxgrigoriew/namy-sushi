@@ -17,7 +17,7 @@ export default defineComponent({
     },
   },
   emits: 'click',
-  setup(props, { slots }) {
+  setup(_, { slots }) {
     const showIcon = computed(() => !!slots.icon)
     onMounted(() => {})
     return {

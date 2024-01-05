@@ -3,7 +3,7 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup(_, { expose }) {
-    const isOpenModal = ref(false)
+    const isOpenModal = ref(true)
     const open = () => (isOpenModal.value = true)
     const close = () => (isOpenModal.value = false)
 
@@ -23,8 +23,8 @@ export default defineComponent({
         <h3 class="login__title">
           <slot name="header" />
         </h3>
-        <slot name="middle"></slot>
-        <slot name="bottom"></slot>
+        <slot name="middle">1</slot>
+        <slot name="bottom">d</slot>
       </div>
     </div>
   </transition>

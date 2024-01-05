@@ -38,7 +38,7 @@ export default defineComponent({
       <is-product-list />
       <is-scroll-button v-scroll-to-top />
 
-      <is-modal ref="cartRef">
+      <!-- <is-modal ref="cartRef">
         <template v-slot:header>Корзина</template>
         <template v-slot:middle>
           <is-cart-list />
@@ -49,12 +49,71 @@ export default defineComponent({
             @next="closeCartModal(), openOrderModal()"
           />
         </template>
-      </is-modal>
+      </is-modal> -->
       <!-- price-modal -->
       <is-modal ref="orderRef">
-        <template v-slot:header>Оформить заказ</template>
-        <template v-slot:middle>
-          <is-cart-price-block @back="closeOrderModal" />
+        <template #header>Оформить заказ</template>
+        <template #middle>
+          <is-order-item :counter="1">
+            <template #header> Способ доставки</template>
+            <template #middle>
+              <is-checkbox-field>
+                <template #checkbox> <is-checkbox /> </template>
+                <template #icon>
+                  <svg width="30" height="30">
+                    <use xlink:href="@/assets/images/sprite.svg#deliver" />
+                  </svg>
+                </template>
+                <template #variant> Курьер </template>
+                <template #description> Временно недоступно </template>
+              </is-checkbox-field>
+              <is-checkbox-field>
+                <template #checkbox> <is-checkbox /> </template>
+                <template #icon>
+                  <svg width="30" height="30">
+                    <use xlink:href="@/assets/images/sprite.svg#bag" />
+                  </svg>
+                </template>
+                <template #variant> Самовывоз </template>
+                <template #description>
+                  <div class="checkbox-field-percent">
+                    <p>Скидка - 10%</p>
+                    <p>на стоиомость покупки</p>
+                  </div>
+                </template>
+              </is-checkbox-field>
+            </template>
+          </is-order-item>
+          <is-order-item :counter="2">
+            <template #header> Данные для доставки</template>
+            <template #middle>
+              <is-checkbox-field>
+                <template #checkbox> <is-checkbox /> </template>
+                <template #icon>
+                  <svg width="30" height="30">
+                    <use xlink:href="@/assets/images/sprite.svg#deliver" />
+                  </svg>
+                </template>
+                <template #variant> Курьер </template>
+                <template #description> Временно недоступно </template>
+              </is-checkbox-field>
+              <is-checkbox-field>
+                <template #checkbox> <is-checkbox /> </template>
+                <template #icon>
+                  <svg width="30" height="30">
+                    <use xlink:href="@/assets/images/sprite.svg#bag" />
+                  </svg>
+                </template>
+                <template #variant> Самовывоз </template>
+                <template #description>
+                  <div class="checkbox-field-percent">
+                    <p>Скидка - 10%</p>
+                    <p>на стоиомость покупки</p>
+                  </div>
+                </template>
+              </is-checkbox-field>
+            </template>
+          </is-order-item>
         </template>
       </is-modal>
     </div>
@@ -79,5 +138,19 @@ export default defineComponent({
 }
 .tab-menu {
   padding-bottom: 60px;
+}
+
+.checkbox-field-percent {
+  display: flex;
+  flex-direction: column;
+  color: #3f4871;
+  font-weight: 700;
+
+  & p:first-child {
+    font-size: 14px;
+  }
+  & p:last-child {
+    font-size: 8px;
+  }
 }
 </style>
