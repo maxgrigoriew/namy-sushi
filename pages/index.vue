@@ -1,39 +1,49 @@
 <script>
-import { defineComponent, ref, reactive } from 'vue'
+import { required, email, minLength } from 'vuelidate/lib/validators'
 
-export default defineComponent({
-  setup() {
-    const count = ref(0)
-    const cartRef = ref(null)
-    const orderRef = ref(null)
-
-    const openCartModal = () => {
-      cartRef.value.open()
-    }
-    const closeCartModal = () => {
-      cartRef.value.close()
-    }
-    const openOrderModal = () => {
-      orderRef.value.open()
-    }
-
-    const orderForm = reactive({
-      user: '',
-      phone: '',
-      info: '',
-    })
-
+export default {
+  data() {
     return {
-      count,
-      openOrderModal,
-      openCartModal,
-      closeCartModal,
-      cartRef,
-      orderRef,
-      orderForm,
+      count: 0,
+      cartRef: null,
+      orderRef: null,
+
+      orderForm: {
+        user: '',
+        phone: '',
+        info: '',
+      },
     }
   },
-})
+  methods: {
+    openCartModal() {
+      this.cartRef.open()
+    },
+    closeCartModal() {
+      this.cartRef.close()
+    },
+    openOrderModal() {
+      this.orderRef.open()
+    },
+  },
+  validations() {
+    return {
+      orderForm: {
+        user: {
+          required,
+          email,
+          minLength: minLength(3),
+        },
+        phone: {
+          required,
+        },
+        info: {
+          required,
+        },
+      },
+    }
+  },
+}
 </script>
 
 <template>
@@ -95,17 +105,23 @@ export default defineComponent({
             <is-order-item :counter="2">
               <template #header> Данные для доставки</template>
               <template #middle>
-                <is-input v-model="orderForm.user">
+                <is-input v-model.trim="orderForm.user">
                   <svg>
                     <use xlink:href="@/assets/images/sprite.svg#user" />
                   </svg>
                 </is-input>
-                <is-input v-model="orderForm.phone">
+                <span class="msg-error" v-if="!$v.orderForm.user.maxLength">
+                  <small>минаммальной число </small>
+                </span>
+                <!-- <span class="msg-error" v-if="!$v.orderForm.user.email">
+                  <small>email is required</small>
+                </span> -->
+                <is-input v-model.trim="orderForm.phone">
                   <svg>
                     <use xlink:href="@/assets/images/sprite.svg#phone" />
                   </svg>
                 </is-input>
-                <is-input v-model="orderForm.info">
+                <is-input v-model.trim="orderForm.info">
                   <svg>
                     <use xlink:href="@/assets/images/sprite.svg#info" />
                   </svg>
@@ -241,5 +257,9 @@ export default defineComponent({
   &__link {
     color: #185598;
   }
+}
+
+.msg-error {
+  color: red;
 }
 </style>
