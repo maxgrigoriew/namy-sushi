@@ -4,20 +4,23 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   props: {
     counter: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: '',
     },
   },
 })
 </script>
 <template>
   <div class="order-item">
-    <div v-if="true" class="order-item__title">
-      <span v-if="true" class="order-item__count"> {{ counter }}</span>
+    <div v-if="$slots.header" class="order-item__title">
+      <span v-if="counter" class="order-item__count"> {{ counter }}</span>
       <slot name="header"></slot>
     </div>
     <div class="order-item__middle">
       <slot name="middle"></slot>
+    </div>
+    <div class="order-item__bottom">
+      <slot name="bottom"></slot>
     </div>
   </div>
 </template>

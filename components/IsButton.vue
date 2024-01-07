@@ -15,6 +15,14 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    isBlue: {
+      type: Boolean,
+      default: false,
+    },
+    isFill: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: 'click',
   setup(_, { slots }) {
@@ -34,6 +42,8 @@ export default defineComponent({
       { 'btn--large': isLarge },
       { 'btn--rectangle': isRectangle },
       { 'btn--dark': isDark },
+      { 'btn--blue': isBlue },
+      { 'btn--fill': isFill },
     ]"
     @click="$emit('click')"
   >
@@ -58,10 +68,6 @@ export default defineComponent({
   transition: all var(--transition);
   white-space: nowrap;
 
-  &:hover {
-    background-color: var(--brown);
-    color: var(--light);
-  }
   &--large {
     padding: 16px 32px;
     font-size: 21px;
@@ -76,16 +82,19 @@ export default defineComponent({
     font-size: 11px;
     font-style: normal;
     font-weight: 500;
-
-    &:hover {
-      background-color: var(--light);
-      color: var(--brown);
-    }
   }
 
   &--dark {
     color: var(--light);
     background-color: var(--brown);
+  }
+  &--blue {
+    color: var(--light);
+    background-color: #0c334a;
+    box-shadow: none;
+  }
+  &--fill {
+    width: 100%;
   }
 }
 
@@ -95,12 +104,6 @@ export default defineComponent({
 
   & svg path {
     transition: all var(--transition);
-  }
-
-  &:hover {
-    & svg path {
-      fill: var(--light);
-    }
   }
 }
 </style>

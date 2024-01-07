@@ -23,8 +23,8 @@ export default defineComponent({
         <h3 class="login__title">
           <slot name="header" />
         </h3>
-        <slot name="middle">1</slot>
-        <slot name="bottom">d</slot>
+        <slot name="middle"></slot>
+        <slot name="bottom"></slot>
       </div>
     </div>
   </transition>
