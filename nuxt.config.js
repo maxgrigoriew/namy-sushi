@@ -20,6 +20,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     'directives/v-scroll-to-top.js',
+    'directives/v-mask.js',
     './plugins/index.js',
     './plugins/vuelidate.js',
   ],

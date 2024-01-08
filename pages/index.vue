@@ -36,9 +36,7 @@ export default {
         },
         phone: {
           required,
-        },
-        info: {
-          required,
+          minLength: minLength(11),
         },
       },
     }
@@ -109,17 +107,29 @@ export default {
                   <svg>
                     <use xlink:href="@/assets/images/sprite.svg#user" />
                   </svg>
+                  <template #error>
+                    <span class="msg-error" v-if="!$v.orderForm.user.minLength">
+                      <small>Длина имени должна быть не менее 3</small>
+                    </span>
+                    <span class="msg-error" v-if="!$v.orderForm.user.required">
+                      <small>Это обязательное поле</small>
+                    </span>
+                  </template>
                 </is-input>
-                <span class="msg-error" v-if="!$v.orderForm.user.maxLength">
-                  <small>минаммальной число </small>
-                </span>
-                <!-- <span class="msg-error" v-if="!$v.orderForm.user.email">
-                  <small>email is required</small>
-                </span> -->
-                <is-input v-model.trim="orderForm.phone">
+
+                <is-input
+                  v-model.trim="orderForm.phone"
+                  v-mask="'+7 (___) ___ __ __'"
+                >
                   <svg>
                     <use xlink:href="@/assets/images/sprite.svg#phone" />
                   </svg>
+
+                  <template #error>
+                    <span class="msg-error" v-if="!$v.orderForm.phone.required">
+                      <small>Это обязательное поле</small>
+                    </span>
+                  </template>
                 </is-input>
                 <is-input v-model.trim="orderForm.info">
                   <svg>

@@ -11,10 +11,6 @@ export default defineComponent({
       type: String,
     },
   },
-
-  setup(props, { emit }) {
-    return {}
-  },
 })
 </script>
 <template>
@@ -31,6 +27,9 @@ export default defineComponent({
       :value="value"
       @input="$emit('input', $event.target.value)"
     />
+    <p class="input-form__error">
+      <slot name="error"></slot>
+    </p>
   </label>
 </template>
 
@@ -59,9 +58,6 @@ export default defineComponent({
     font-size: 16px;
     font-style: normal;
     font-weight: 300;
-
-    &::placeholder {
-    }
   }
 
   &__icon {
@@ -76,6 +72,11 @@ export default defineComponent({
       width: 18px;
       height: 18px;
     }
+  }
+
+  &__error {
+    position: absolute;
+    bottom: -16px;
   }
 }
 </style>
