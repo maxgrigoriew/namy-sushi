@@ -27,6 +27,7 @@
 <style lang="scss">
 .menu {
   padding-top: 90px;
+  padding-bottom: 60px;
   &__title {
     margin-bottom: 50px;
     font-size: 60px;

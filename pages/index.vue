@@ -1,31 +1,8 @@
 <script>
+import { ref, defineComponent, reactive } from 'vue'
 import { required, email, minLength } from 'vuelidate/lib/validators'
 
-export default {
-  data() {
-    return {
-      count: 0,
-      cartRef: null,
-      orderRef: null,
-
-      orderForm: {
-        user: '',
-        phone: '',
-        info: '',
-      },
-    }
-  },
-  methods: {
-    openCartModal() {
-      this.cartRef.open()
-    },
-    closeCartModal() {
-      this.cartRef.close()
-    },
-    openOrderModal() {
-      this.orderRef.open()
-    },
-  },
+export default defineComponent({
   validations() {
     return {
       orderForm: {
@@ -36,12 +13,37 @@ export default {
         },
         phone: {
           required,
-          minLength: minLength(11),
         },
       },
     }
   },
-}
+  setup() {
+    const cartRef = ref(null)
+    const orderRef = ref(null)
+    const orderForm = reactive({
+      user: '',
+      phone: '',
+      info: '',
+    })
+    const openCartModal = () => {
+      cartRef.value.open()
+    }
+    const closeCartModal = () => {
+      cartRef.value.close()
+    }
+    const openOrderModal = () => {
+      orderRef.value.open()
+    }
+    return {
+      orderForm,
+      orderRef,
+      cartRef,
+      openCartModal,
+      closeCartModal,
+      openOrderModal,
+    }
+  },
+})
 </script>
 
 <template>
@@ -52,7 +54,7 @@ export default {
       <is-product-list />
       <is-scroll-button v-scroll-to-top />
 
-      <!-- <is-modal ref="cartRef">
+      <is-modal ref="cartRef">
         <template v-slot:header>Корзина</template>
         <template v-slot:middle>
           <is-cart-list />
@@ -63,7 +65,7 @@ export default {
             @next="closeCartModal(), openOrderModal()"
           />
         </template>
-      </is-modal> -->
+      </is-modal>
       <!-- price-modal -->
       <is-modal ref="orderRef">
         <template #header>Оформить заказ</template>
@@ -93,7 +95,7 @@ export default {
                   <template #description>
                     <div class="checkbox-field-percent">
                       <p>Скидка - 10%</p>
-                      <p>на стоиомость покупки</p>
+                      <p>на стоимость покупки</p>
                     </div>
                   </template>
                 </is-checkbox-field>
@@ -192,9 +194,6 @@ export default {
     height: 40px;
     background-color: #243139;
   }
-}
-.tab-menu {
-  padding-bottom: 60px;
 }
 
 .checkbox-field-percent {
