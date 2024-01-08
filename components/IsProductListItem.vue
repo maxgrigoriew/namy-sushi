@@ -124,6 +124,9 @@ export default {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 25px;
+    img {
+      width: 100%;
+    }
   }
 
   &__top {
@@ -181,6 +184,28 @@ export default {
     display: inline-flex;
     align-items: center;
     gap: 13px;
+  }
+}
+
+@media (max-width: 520px) {
+  .product-item {
+    padding: 20px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &__img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
+    }
+
+    &__top {
+      margin-bottom: 10px;
+    }
+    &__text {
+      margin-bottom: 10px;
+    }
   }
 }
 </style>

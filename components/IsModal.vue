@@ -3,7 +3,7 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup(_, { expose }) {
-    const isOpenModal = ref(true)
+    const isOpenModal = ref(false)
     const open = () => (isOpenModal.value = true)
     const close = () => (isOpenModal.value = false)
 

@@ -26,12 +26,12 @@ h6 {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--blue-middle);
+  background-color: var(--blue);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--blue-middle) #fff;
+  scrollbar-color: var(--blue);
 }
 
 .list-reset {

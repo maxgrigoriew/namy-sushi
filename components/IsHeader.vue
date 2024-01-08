@@ -1,36 +1,63 @@
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import menu from './../data/menu'
 
 export default defineComponent({
   emits: 'click',
 
-  setup(_, { emit }) {},
+  setup(_, { emit }) {
+    const menuRef = ref(null)
+    const isOpenMenu = ref(false)
+
+    const changeMenu = () => {
+      console.log(123)
+      isOpenMenu.value = !isOpenMenu.value
+    }
+
+    return {
+      changeMenu,
+      isOpenMenu,
+      menuRef,
+      menu,
+    }
+  },
 })
 </script>
 <template>
   <header id="header" class="header">
     <div class="container">
       <div class="header__inner">
-        <a href="#" class="header__logo">
-          <img src="./../assets/images/logo.png" alt="Логотип" />
-        </a>
-
-        <nav class="header__menu">
+        <div class="header__wrapper">
+          <button
+            class="header__burger"
+            :class="{ active: isOpenMenu }"
+            area-label="Открыть меню"
+            role="button"
+            @click="changeMenu"
+          >
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+          </button>
+          <a href="#" class="header__logo">
+            <picture>
+              <source
+                srcset="./../assets/images/mobile-logo.png"
+                media="(max-width: 1024px)"
+              />
+              <img src="./../assets/images/logo.png" alt="Логотип" />
+            </picture>
+          </a>
+        </div>
+        <nav class="header__menu" :class="{ active: isOpenMenu }" ref="menuRef">
           <ul class="header__menu-list list-reset">
-            <li class="header__menu-item">
-              <a href="#" class="header__menu-link">Меню</a>
-            </li>
-            <li class="header__menu-item">
-              <a href="#" class="header__menu-link">Доставка</a>
-            </li>
-            <li class="header__menu-item">
-              <a href="#" class="header__menu-link">Акции</a>
-            </li>
-            <li class="header__menu-item">
-              <a href="#" class="header__menu-link">Отзывы</a>
-            </li>
-            <li class="header__menu-item">
-              <a href="#" class="header__menu-link">Контакты</a>
+            <li class="header__menu-item" v-for="item in menu" :key="item.name">
+              <NuxtLink
+                :to="item.path"
+                class="header__menu-link"
+                @click.native="changeMenu"
+                >{{ item.name }}</NuxtLink
+              >
             </li>
           </ul>
         </nav>
@@ -90,7 +117,48 @@ export default defineComponent({
     justify-content: space-between;
     padding-left: 230px;
   }
+  &__wrapper {
+    display: flex;
+    gap: 20px;
+  }
+  &__burger {
+    display: none;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    align-self: center;
+    cursor: pointer;
+    height: 24px;
+    width: 30px;
+    z-index: 2;
+    flex-direction: column;
+    justify-content: space-between;
 
+    & .line {
+      display: block;
+      height: 3px;
+      width: 100%;
+      border-radius: 10px;
+      background-color: var(--light);
+      transition: all var(--transition);
+    }
+
+    &.active {
+      .line1 {
+        transform: rotate(45deg) translate(5px, -4px);
+        transform-origin: left;
+      }
+
+      .line2 {
+        opacity: 0;
+      }
+
+      .line3 {
+        transform: rotate(-45deg) translate(3px, 6px);
+        transform-origin: left;
+      }
+    }
+  }
   &__logo {
     position: absolute;
     display: flex;
@@ -126,12 +194,7 @@ export default defineComponent({
     }
 
     &-link {
-      transition: all var(--transition);
       color: var(--light);
-      border-bottom: 2px solid transparent;
-      &:hover {
-        border-bottom: 2px solid var(--light);
-      }
     }
   }
 
@@ -141,11 +204,6 @@ export default defineComponent({
     color: var(--light);
 
     gap: 3px;
-    transition: all var(--transition);
-    border-bottom: 2px solid transparent;
-    &:hover {
-      border-bottom: 2px solid var(--light);
-    }
     &__text {
       font-size: 18px;
     }
@@ -154,6 +212,72 @@ export default defineComponent({
     display: flex;
     align-items: center;
     gap: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header {
+    &__inner {
+      padding-left: 0;
+      padding: 12px 0;
+    }
+    &__burger {
+      display: flex;
+    }
+    &__logo {
+      position: static;
+      display: block;
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      background-color: transparent;
+    }
+
+    &__menu {
+      position: fixed;
+      left: -100%;
+      width: 100%;
+      top: 66px;
+      transition: var(--transition);
+      bottom: 0;
+      background-color: var(--blue);
+      overflow-x: auto;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &-list {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+      }
+
+      &-link {
+        font-size: 26px;
+      }
+      &-item:not(:last-child)::after {
+        display: none;
+      }
+
+      &.active {
+        left: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .header {
+    &__phone {
+      &-text {
+        display: none;
+      }
+    }
+
+    &__buttons {
+      display: none;
+    }
   }
 }
 </style>

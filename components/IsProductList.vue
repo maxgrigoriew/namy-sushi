@@ -17,4 +17,22 @@ export default {}
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
 }
+
+@media (max-width: 1024px) {
+  .product {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .product {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 520px) {
+  .product {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+  }
+}
 </style>

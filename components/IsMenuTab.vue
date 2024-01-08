@@ -4,7 +4,7 @@
     <div class="menu__title">Меню</div>
     <ul class="menu__list list-reset">
       <li class="menu__list-item">
-        <is-button is-large class="menu__list-btn">Роллы</is-button>
+        <is-button is-large class="menu__list-btn active">Роллы</is-button>
       </li>
       <li class="menu__list-item">
         <is-button is-large class="menu__list-btn">суши и гунканы</is-button>
@@ -56,14 +56,63 @@
   }
 
   &__list {
-    display: grid;
-    grid-auto-flow: column;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 
     &-btn {
       text-transform: uppercase;
       padding: 16px 32px;
-      font-size: 20px;
+      font-size: 28px !important;
+      color: var(--gold);
+
+      &.active {
+        background-color: var(--brown);
+        color: var(--light);
+      }
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .menu {
+    &__title {
+      font-size: 48px;
+    }
+    &__list {
+      justify-content: flex-start;
+      &-btn {
+        padding: 14px 20px;
+        font-size: 20px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .menu {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    &__title {
+      font-size: 22px;
+      margin-bottom: 32px;
+      &::before {
+        width: 5px;
+        height: 5px;
+        margin-right: 15px;
+      }
+      &::after {
+        width: 5px;
+        height: 5px;
+        margin-left: 15px;
+      }
+    }
+
+    &__list {
+      &-btn {
+        font-size: 16px !important;
+        padding: 12px 18px !important;
+      }
     }
   }
 }
