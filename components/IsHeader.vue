@@ -5,13 +5,13 @@ import menu from './../data/menu'
 export default defineComponent({
   emits: 'click',
 
-  setup(_, { emit }) {
+  setup() {
     const menuRef = ref(null)
     const isOpenMenu = ref(false)
 
     const changeMenu = () => {
-      console.log(123)
       isOpenMenu.value = !isOpenMenu.value
+      document.querySelector('body').classList.toggle('active')
     }
 
     return {
@@ -61,7 +61,7 @@ export default defineComponent({
             </li>
           </ul>
           <div class="header__buttons--mobile">
-            <is-button @click="$emit('openModal')">
+            <is-button @click="$emit('openModal'), changeMenu()">
               <template v-slot:icon>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +103,7 @@ export default defineComponent({
         >
 
         <div class="header__buttons">
-          <is-button @click="$emit('openModal')">
+          <is-button @click="$emit('openModal'), changeMenu()">
             <template v-slot:icon>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -292,14 +292,6 @@ export default defineComponent({
         left: 0;
       }
     }
-
-    &__buttons {
-      &--mobile {
-        padding-top: 25px;
-        display: flex;
-        gap: 25px;
-      }
-    }
   }
 }
 
@@ -313,6 +305,11 @@ export default defineComponent({
 
     &__buttons {
       display: none;
+      &--mobile {
+        padding-top: 25px;
+        display: flex;
+        gap: 25px;
+      }
     }
   }
 }

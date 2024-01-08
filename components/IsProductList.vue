@@ -3,10 +3,7 @@ export default {}
 </script>
 <template>
   <ul class="product list-reset">
-    <is-product-list-item
-      v-for="item in 10"
-      :key="item"
-      class="product__list-item"
+    <is-product-list-item v-for="item in 10" :key="item"
       >1</is-product-list-item
     >
   </ul>

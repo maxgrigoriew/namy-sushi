@@ -4,14 +4,22 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup(_, { expose }) {
     const isOpenModal = ref(false)
+    const toggle = () => {
+      document.querySelector('body').classList.toggle('active')
+      isOpenModal.value = true
+    }
     const open = () => (isOpenModal.value = true)
-    const close = () => (isOpenModal.value = false)
+    const close = () => {
+      document.querySelector('body').classList.remove('active')
+      isOpenModal.value = false
+    }
 
-    expose({ close, open })
+    expose({ close, open, toggle })
     return {
       isOpenModal,
       close,
       open,
+      toggle,
     }
   },
 })
@@ -76,6 +84,32 @@ export default defineComponent({
 
     &::after {
       margin-left: 40px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .login {
+    &__inner {
+      padding: 15px;
+      max-width: 400px;
+    }
+
+    &__title {
+      font-size: 30px;
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .login {
+    &__inner {
+      padding: 15px;
+      max-width: 280px;
+    }
+
+    &__title {
+      font-size: 22px;
     }
   }
 }

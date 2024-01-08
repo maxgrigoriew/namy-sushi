@@ -233,4 +233,56 @@ export default {
     cursor: pointer;
   }
 }
+
+@media (max-width: 1024px) {
+  .cart-item {
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 50px;
+    &__img {
+      margin-right: auto;
+    }
+    &__content {
+      margin-right: 0;
+    }
+    &__bottom {
+      flex-direction: row;
+      align-items: center;
+      margin-left: 0;
+      gap: 20px;
+    }
+
+    &__price {
+      gap: 6px;
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .cart-item {
+    &__img {
+      width: 60px;
+      height: 60px;
+    }
+
+    &__title {
+      font-size: 14px;
+    }
+
+    &__text {
+      font-size: 12px;
+    }
+
+    &__bottom {
+      gap: 10px;
+      flex-direction: column;
+      align-self: flex-start;
+      align-items: flex-start;
+    }
+
+    &__delete {
+      height: 44px;
+    }
+  }
+}
 </style>
