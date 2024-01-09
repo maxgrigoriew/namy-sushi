@@ -1,25 +1,29 @@
-<script></script>
+<script>
+import { defineComponent } from 'vue'
+import categories from '~/data/categories'
+export default defineComponent({
+  setup() {
+    return {
+      categories,
+    }
+  },
+})
+</script>
 <template>
   <div class="menu">
     <div class="menu__title">Меню</div>
     <ul class="menu__list list-reset">
-      <li class="menu__list-item">
-        <is-button is-large class="menu__list-btn active">Роллы</is-button>
-      </li>
-      <li class="menu__list-item">
-        <is-button is-large class="menu__list-btn">суши и гунканы</is-button>
-      </li>
-      <li class="menu__list-item">
-        <is-button is-large class="menu__list-btn">сеты</is-button>
-      </li>
-      <li class="menu__list-item">
-        <is-button is-large class="menu__list-btn">лапша и рис</is-button>
-      </li>
-      <li class="menu__list-item">
-        <is-button is-large class="menu__list-btn">салаты</is-button>
-      </li>
-      <li class="menu__list-item">
-        <is-button is-large class="menu__list-btn">ГОрячие блюда</is-button>
+      <li
+        class="menu__list-item"
+        v-for="category in categories"
+        :key="category.name"
+      >
+        <is-button
+          is-large
+          class="menu__list-btn"
+          :class="{ active: category.name === 'Роллы' }"
+          >{{ category.name }}</is-button
+        >
       </li>
     </ul>
   </div>
