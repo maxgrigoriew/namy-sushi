@@ -11,7 +11,9 @@ export default defineComponent({
 
     const changeMenu = () => {
       isOpenMenu.value = !isOpenMenu.value
-      document.querySelector('body').classList.toggle('active')
+      if (window.innerWidth < 1024) {
+        document.querySelector('body').classList.toggle('active')
+      }
     }
 
     return {
@@ -61,7 +63,7 @@ export default defineComponent({
             </li>
           </ul>
           <div class="header__buttons--mobile">
-            <is-button @click="$emit('openModal'), changeMenu()">
+            <is-button @click="$emit('openModal')">
               <template v-slot:icon>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +105,7 @@ export default defineComponent({
         >
 
         <div class="header__buttons">
-          <is-button @click="$emit('openModal'), changeMenu()">
+          <is-button @click="$emit('openModal')">
             <template v-slot:icon>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

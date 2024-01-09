@@ -58,6 +58,10 @@ body {
   font-weight: 400;
   line-height: 1.25;
   letter-spacing: 0.8px;
+  background-image: url('./../images//bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top 82px center;
 
   &.active {
     overflow-y: hidden;

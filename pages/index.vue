@@ -109,7 +109,7 @@ export default defineComponent({
             <is-order-item :counter="2">
               <template #header> Данные для доставки</template>
               <template #middle>
-                <is-input v-model.trim="orderForm.user">
+                <is-input v-model.trim="orderForm.user" placeholder="Имя">
                   <svg>
                     <use xlink:href="@/assets/images/sprite.svg#user" />
                   </svg>
@@ -126,6 +126,7 @@ export default defineComponent({
                 <is-input
                   v-model.trim="orderForm.phone"
                   v-mask="'+7 (___) ___ __ __'"
+                  placeholder="Телефон"
                 >
                   <svg>
                     <use xlink:href="@/assets/images/sprite.svg#phone" />
@@ -137,7 +138,10 @@ export default defineComponent({
                     </span>
                   </template>
                 </is-input>
-                <is-input v-model.trim="orderForm.info">
+                <is-input
+                  v-model.trim="orderForm.info"
+                  placeholder="Дополнительная информация"
+                >
                   <svg>
                     <use xlink:href="@/assets/images/sprite.svg#info" />
                   </svg>
@@ -274,5 +278,6 @@ export default defineComponent({
 
 .msg-error {
   color: red;
+  font-family: var(--ubuntu);
 }
 </style>

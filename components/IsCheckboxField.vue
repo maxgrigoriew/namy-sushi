@@ -44,4 +44,34 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .checkbox-field {
+    &__item {
+      &:nth-child(1) {
+        margin-right: 15px;
+      }
+      &:nth-child(2) {
+        margin-right: 20px;
+      }
+      &:nth-child(3) {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .checkbox-field {
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+    &__item {
+      &:nth-child(4) {
+        margin-left: 0;
+        padding-left: 0;
+      }
+    }
+  }
+}
 </style>

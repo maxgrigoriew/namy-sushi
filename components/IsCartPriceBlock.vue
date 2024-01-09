@@ -92,4 +92,19 @@ export default {
     }
   }
 }
+
+@media (max-width: 520px) {
+  .total-amount {
+    &__price {
+      margin-bottom: 10px;
+    }
+    &__text {
+      margin-bottom: 10px;
+    }
+    &__buttons {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}
 </style>

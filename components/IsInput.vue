@@ -23,7 +23,7 @@ export default defineComponent({
       class="input-form__field"
       name="color"
       type="input"
-      placeholder
+      :placeholder="placeholder"
       :value="value"
       @input="$emit('input', $event.target.value)"
     />

@@ -61,7 +61,7 @@ export default defineComponent({
 
   &__title {
     margin-bottom: 33px;
-    font-size: 48px;
+    font-size: 44px;
     color: var(--brown);
     text-transform: uppercase;
     text-align: center;
@@ -97,6 +97,14 @@ export default defineComponent({
 
     &__title {
       font-size: 30px;
+
+      &::before {
+        margin-right: 20px;
+      }
+
+      &::after {
+        margin-left: 20px;
+      }
     }
   }
 }
