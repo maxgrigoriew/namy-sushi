@@ -2,7 +2,12 @@
 import { ref } from 'vue'
 
 export default {
-  props: {},
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup(props) {
     const isCart = ref(true)
     const count = ref(0)
@@ -39,7 +44,11 @@ export default {
       <isButton is-rectangle class="btn" @click="$emit('back')"
         >Вернуться к покупкам</isButton
       >
-      <isButton is-rectangle class="btn" @click="$emit('next')"
+      <isButton
+        :disabled="disabled"
+        is-rectangle
+        class="btn"
+        @click="$emit('next')"
         >Оформить заказ</isButton
       >
     </div>
@@ -47,6 +56,7 @@ export default {
 </template>
 <style lang="scss">
 .total-amount {
+  padding: 10px;
   &__price {
     margin: auto 0 40px;
     display: inline-flex;

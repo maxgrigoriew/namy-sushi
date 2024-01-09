@@ -94,6 +94,7 @@ export default defineComponent({
             style="margin-top: auto"
             @back="closeCartModal"
             @next="closeCartModal(), openOrderModal()"
+            :disabled="!favoriteCount"
           />
         </template>
       </is-modal>

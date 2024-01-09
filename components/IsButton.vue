@@ -23,6 +23,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: 'click',
   setup(_, { slots }) {
@@ -44,6 +48,7 @@ export default defineComponent({
       { 'btn--dark': isDark },
       { 'btn--blue': isBlue },
       { 'btn--fill': isFill },
+      { 'btn--disabled': disabled },
     ]"
     @click="$emit('click')"
   >
@@ -96,6 +101,10 @@ export default defineComponent({
   }
   &--fill {
     width: 100%;
+  }
+  &--disabled {
+    pointer-events: none;
+    opacity: 0.5;
   }
 }
 
