@@ -54,6 +54,9 @@
         margin-right: 15px;
       }
       &:nth-child(2) {
+        width: 26px;
+        height: 26px;
+        margin-right: 0;
         margin-right: 20px;
       }
       &:nth-child(3) {

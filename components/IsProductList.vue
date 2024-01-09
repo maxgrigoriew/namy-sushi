@@ -8,27 +8,35 @@ export default defineComponent({
     },
   },
   setup(_, { emit }) {
-    const addCategory = (category) => {
-      console.log(category)
+    const addCategory = category => {
       emit('addCategory', category)
+    }
+
+    const removeCategory = category => {
+      emit('removeCategory', category)
     }
 
     return {
       addCategory,
+      removeCategory,
     }
   },
 })
 </script>
 <template>
-  <ul class="product list-reset">
-    <is-product-list-item
-      @addCategory="addCategory"
-      :category="item"
-      v-for="item in categories"
-      :key="item.id"
-      >1</is-product-list-item
-    >
-  </ul>
+  <div>
+    <ul class="product list-reset">
+      <is-product-list-item
+        @addCategory="addCategory"
+        @removeCategory="removeCategory"
+        :category="item"
+        v-for="item in categories"
+        :key="item.id"
+        >1</is-product-list-item
+      >
+    </ul>
+    asd
+  </div>
 </template>
 <style lang="scss">
 .product {

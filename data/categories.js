@@ -26,7 +26,7 @@ export default [
   {
     id: 'sushi',
     img: 'product-4.webp',
-    name: 'КАЛИФОРНИЯ',
+    name: 'Филадельфия',
     info: 'рис, нори, майонез, краб, огурец, авокадо, тобико оранжева',
     price: 400,
     weight: '350',
@@ -50,7 +50,7 @@ export default [
   {
     id: 'sets',
     img: 'product-5.webp',
-    name: 'КУНСЕЙ БАТАКОН',
+    name: 'Атакама',
     info: 'рис, нори, острый соус, помидор, огурец, бекон, копченый лосось',
     price: 380,
     weight: '340',

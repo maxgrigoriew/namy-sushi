@@ -1,7 +1,7 @@
 <script>
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   props: {
     favorite: {
       type: Object,
@@ -28,7 +28,7 @@ export default {
       count,
     }
   },
-}
+})
 </script>
 <template>
   <li class="cart-item" :class="{ active: count > 0 }">
@@ -71,7 +71,11 @@ export default {
         <span>Сумма</span><span>{{ favorite.price }} ₽</span>
       </p>
     </div>
-    <button is-dark class="cart-item__delete">
+    <button
+      is-dark
+      class="cart-item__delete"
+      @click="$emit('removeCategory', favorite)"
+    >
       <svg width="16" height="16">
         <use xlink:href="@/assets/images/sprite.svg#backet" />
       </svg>

@@ -13,6 +13,7 @@ export default defineComponent({
   <ul class="cart-list list-reset">
     <is-cart-list-item
       :favorite="favorite"
+      @removeCategory="$emit('removeCategory', favorite)"
       v-for="favorite in favorites"
       :key="favorite.id"
       class="cart__list-item"

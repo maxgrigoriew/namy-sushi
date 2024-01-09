@@ -8,6 +8,7 @@ export default defineComponent({
       default: '',
     },
   },
+  setup() {},
 })
 </script>
 <template>
@@ -63,9 +64,6 @@ export default defineComponent({
     gap: 20px;
     padding: 20px 0 0 40px;
   }
-
-  &__middle {
-  }
 }
 
 @media (max-width: 1024px) {
@@ -73,13 +71,26 @@ export default defineComponent({
     &__middle {
       padding: 20px 0 0 0px;
     }
+
+    &__title {
+      font-size: 20px;
+      display: flex;
+      align-items: flex-end;
+      align-items: center;
+      gap: 10px;
+      padding-left: 0;
+    }
+
+    &__count {
+      position: static;
+      transform: translateY(0);
+    }
   }
 }
 
 @media (max-width: 520px) {
   .order-item {
     &__count {
-      left: 0;
       width: 26px;
       height: 26px;
       font-size: 14px;

@@ -24,6 +24,7 @@ export default defineComponent({
       default: false,
     },
   },
+  emits: 'click',
   setup(_, { slots }) {
     const showIcon = computed(() => !!slots.icon)
     onMounted(() => {})

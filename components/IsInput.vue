@@ -76,7 +76,7 @@ export default defineComponent({
 
   &__error {
     position: absolute;
-    bottom: -16px;
+    bottom: -18px;
   }
 }
 

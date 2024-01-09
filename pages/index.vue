@@ -41,8 +41,13 @@ export default defineComponent({
       orderRef.value.open()
     }
 
-    const addCategory = (category) => {
+    const addCategory = category => {
       favoriteCategories.value.push(category)
+    }
+    const removeCategory = category => {
+      favoriteCategories.value = favoriteCategories.value.filter(
+        item => category.name !== item.name
+      )
     }
     return {
       orderForm,
@@ -56,6 +61,7 @@ export default defineComponent({
       favoriteCategories,
       favoriteCount,
       addCategory,
+      removeCategory,
     }
   },
 })
@@ -66,13 +72,22 @@ export default defineComponent({
     <is-header @openModal="toggleCartModal" :favoriteCount="favoriteCount" />
     <div class="container">
       <is-menu-tab class="tab-menu" />
-      <is-product-list :categories="categories" @addCategory="addCategory" />
+      <is-product-list
+        :categories="categories"
+        @addCategory="addCategory"
+        @removeCategory="removeCategory"
+      />
       <is-scroll-button v-scroll-to-top />
 
       <is-modal ref="cartRef">
         <template v-slot:header>Корзина</template>
         <template v-slot:middle>
-          <is-cart-list :favorites="favoriteCategories" />
+          <is-cart-list
+            v-if="favoriteCategories.length"
+            :favorites="favoriteCategories"
+            @removeCategory="removeCategory"
+          />
+          <div style="text-align: center" v-else>Список пуст</div>
         </template>
         <template v-slot:bottom>
           <is-cart-price-block

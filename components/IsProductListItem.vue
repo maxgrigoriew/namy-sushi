@@ -1,42 +1,46 @@
 <script>
-import { ref } from 'vue'
+import { ref, defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   props: {
     category: {
       type: Object,
     },
   },
-  setup(props, { emit }) {
+  setup(_, { emit }) {
     const isCart = ref(true)
-    const count = ref(0)
+    const productCounter = ref(0)
     const incrementCount = () => {
-      count.value++
+      productCounter.value++
     }
     const decrementCount = () => {
-      if (count.value > 0) {
-        count.value--
+      if (productCounter.value > 0) {
+        productCounter.value--
       }
     }
 
-    const changeIsCart = () => (isCart.value = !isCart.value)
-    const addCategory = (category) => {
-      console.log('add catigory')
+    const addCategory = category => {
       emit('addCategory', category)
     }
+    const removeCategory = category => {
+      if (productCounter.value === 0) {
+        emit('removeCategory', category)
+      }
+    }
+
     return {
       isCart,
-      changeIsCart,
       incrementCount,
       decrementCount,
-      count,
+      productCounter,
       addCategory,
+      removeCategory,
     }
   },
-}
+})
 </script>
 <template>
-  <li class="product-item" :class="{ active: count > 0 }">
+  <li class="product-item" :class="{ active: productCounter > 0 }">
     <div class="product-item__img">
       <img
         :src="require(`@/assets/images/${category.img}`)"
@@ -53,21 +57,24 @@ export default {
     <div class="product-item__bottom">
       <span class="product-item__price">{{ category.price }} ₽</span>
       <is-button
-        v-if="isCart"
+        v-if="!productCounter"
         class="product-item__button"
         is-rectangle
-        @click="changeIsCart(), incrementCount(), addCategory(category)"
+        @click="incrementCount(), addCategory(category)"
         >В корзину</is-button
       >
       <div v-else class="product-item__counters">
-        <is-button class="product-item__increment" @click="decrementCount">
+        <is-button
+          class="product-item__increment"
+          @click="decrementCount(), removeCategory(category)"
+        >
           <template v-slot:icon>
             <svg width="16" height="16">
               <use xlink:href="@/assets/images/sprite.svg#minus" />
             </svg>
           </template>
         </is-button>
-        <span class="product-item__count">{{ count }}</span>
+        <span class="product-item__count">{{ productCounter }}</span>
         <is-button class="product-item__decrement" @click="incrementCount">
           <template v-slot:icon>
             <svg width="16" height="16">
