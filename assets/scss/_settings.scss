@@ -82,3 +82,9 @@ body {
 .fade-leave-to {
   opacity: 0;
 }
+
+@media (max-width: 1600px) {
+  body {
+    background-image: none;
+  }
+}

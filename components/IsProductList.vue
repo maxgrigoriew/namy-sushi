@@ -1,9 +1,23 @@
 <script>
-export default {}
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  props: {
+    categories: {
+      type: Array,
+    },
+  },
+  setup() {
+    return {}
+  },
+})
 </script>
 <template>
   <ul class="product list-reset">
-    <is-product-list-item v-for="item in 10" :key="item"
+    <is-product-list-item
+      :category="item"
+      v-for="item in categories"
+      :key="item.id"
       >1</is-product-list-item
     >
   </ul>

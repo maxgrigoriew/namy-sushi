@@ -1,10 +1,10 @@
 <script>
 import { defineComponent } from 'vue'
-import categories from '~/data/categories'
+import tabs from '~/data/tabs'
 export default defineComponent({
   setup() {
     return {
-      categories,
+      tabs,
     }
   },
 })
@@ -13,16 +13,12 @@ export default defineComponent({
   <div class="menu">
     <div class="menu__title">Меню</div>
     <ul class="menu__list list-reset">
-      <li
-        class="menu__list-item"
-        v-for="category in categories"
-        :key="category.name"
-      >
+      <li class="menu__list-item" v-for="tab in tabs" :key="tab.name">
         <is-button
           is-large
           class="menu__list-btn"
-          :class="{ active: category.name === 'Роллы' }"
-          >{{ category.name }}</is-button
+          :class="{ active: tab.name === 'Роллы' }"
+          >{{ tab.name }}</is-button
         >
       </li>
     </ul>
@@ -63,6 +59,7 @@ export default defineComponent({
   &__list {
     display: flex;
     flex-wrap: wrap;
+    gap: 5px;
     justify-content: space-between;
 
     &-btn {
@@ -70,7 +67,7 @@ export default defineComponent({
       padding: 16px 32px;
       font-size: 28px !important;
       color: var(--gold);
-
+      background-color: transparent;
       &.active {
         background-color: var(--brown);
         color: var(--light);
@@ -122,3 +119,4 @@ export default defineComponent({
   }
 }
 </style>
+~/data/tabs

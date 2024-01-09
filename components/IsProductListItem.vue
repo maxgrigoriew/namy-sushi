@@ -2,7 +2,11 @@
 import { ref } from 'vue'
 
 export default {
-  props: {},
+  props: {
+    category: {
+      type: Object,
+    },
+  },
   setup(props, { emit }) {
     const isCart = ref(true)
     const count = ref(0)
@@ -29,17 +33,17 @@ export default {
 <template>
   <li class="product-item" :class="{ active: count > 0 }">
     <div class="product-item__img">
-      <img src="./../assets/images/product-1.png" alt="" />
+      <img :src="require(`../assets/images/${category.img}`)" alt="" />
     </div>
     <div class="product-item__top">
-      <span class="product-item__title">ролл ясай</span>
-      <span class="product-item__weight">185 г</span>
+      <span class="product-item__title">{{ category.name }}</span>
+      <span class="product-item__weight"> {{ category.weight }} г</span>
     </div>
     <p class="product-item__text">
-      Огурец, авокадо, помидор, болгарский перец, листья салата, кунжут
+      {{ category.info }}
     </p>
     <div class="product-item__bottom">
-      <span class="product-item__price">200 ₽</span>
+      <span class="product-item__price">{{ category.price }} ₽</span>
       <is-button
         v-if="isCart"
         class="product-item__button"
@@ -93,6 +97,8 @@ export default {
 </template>
 <style lang="scss">
 .product-item {
+  display: flex;
+  flex-direction: column;
   padding: 30px;
   background: #fafafa;
   box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.25);
@@ -164,6 +170,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
   }
 
   &__price {

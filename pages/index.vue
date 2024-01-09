@@ -1,6 +1,7 @@
 <script>
 import { ref, defineComponent, reactive } from 'vue'
 import { required, email, minLength } from 'vuelidate/lib/validators'
+import categories from '@/data/categories'
 
 export default defineComponent({
   validations() {
@@ -45,6 +46,7 @@ export default defineComponent({
       closeCartModal,
       openOrderModal,
       toggleCartModal,
+      categories,
     }
   },
 })
@@ -55,7 +57,7 @@ export default defineComponent({
     <is-header @openModal="toggleCartModal" />
     <div class="container">
       <is-menu-tab class="tab-menu" />
-      <is-product-list />
+      <is-product-list :categories="categories" />
       <is-scroll-button v-scroll-to-top />
 
       <is-modal ref="cartRef">
@@ -153,6 +155,7 @@ export default defineComponent({
               <template #middle>
                 <ul class="order-table list-reset">
                   <li class="order-table__item">
+                    <div class="order-table__item-title">Cтоимость товаров</div>
                     <div class="order-table__item-title">Cтоимость товаров</div>
                     <div class="order-table__item-price">450 ₽</div>
                   </li>
