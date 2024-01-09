@@ -79,4 +79,14 @@ export default defineComponent({
     bottom: -16px;
   }
 }
+
+@media (max-width: 520px) {
+  .input-form {
+    &__field {
+      font-size: 12px;
+      &::placeholder {
+      }
+    }
+  }
+}
 </style>

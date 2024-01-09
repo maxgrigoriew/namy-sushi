@@ -29,6 +29,8 @@
       justify-content: center;
       align-items: center;
       margin-right: 40px;
+      width: 32px;
+      height: 32px;
     }
     &:nth-child(3) {
       font-size: 18px;
@@ -63,13 +65,23 @@
 
 @media (max-width: 520px) {
   .checkbox-field {
-    flex-direction: column;
-    align-items: start;
     gap: 10px;
     &__item {
+      &:nth-child(1) {
+        margin-right: 0;
+      }
+      &:nth-child(2) {
+        width: 20px;
+        height: 20px;
+        margin-right: 0;
+      }
+      &:nth-child(3) {
+        font-size: 14px;
+      }
       &:nth-child(4) {
         margin-left: 0;
         padding-left: 0;
+        font-size: 10px;
       }
     }
   }

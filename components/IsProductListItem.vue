@@ -38,7 +38,10 @@ export default {
 <template>
   <li class="product-item" :class="{ active: count > 0 }">
     <div class="product-item__img">
-      <img :src="require(`../assets/images/${category.img}`)" alt="" />
+      <img
+        :src="require(`@/assets/images/${category.img}`)"
+        :alt="`${category.name}`"
+      />
     </div>
     <div class="product-item__top">
       <span class="product-item__title">{{ category.name }}</span>

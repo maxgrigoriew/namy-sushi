@@ -73,7 +73,7 @@ export default {
     padding-left: 16px;
     color: var(--dark);
     max-width: 360px;
-    font-family: 'Ubuntu';
+    font-family: var(--ubuntu);
     font-size: 16px;
     font-style: normal;
     font-weight: 300;
@@ -99,10 +99,12 @@ export default {
     }
     &__text {
       margin-bottom: 10px;
+      font-size: 12px;
     }
     &__buttons {
       flex-direction: column;
       gap: 10px;
+      width: 100%;
     }
   }
 }

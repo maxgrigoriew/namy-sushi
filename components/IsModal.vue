@@ -52,7 +52,7 @@ export default defineComponent({
     max-width: 614px;
     margin-left: auto;
     height: 100%;
-    padding: 30px 40px;
+    padding: 30px 30px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -91,7 +91,7 @@ export default defineComponent({
 @media (max-width: 1024px) {
   .login {
     &__inner {
-      padding: 15px;
+      padding: 10px;
       max-width: 400px;
     }
 
@@ -117,7 +117,15 @@ export default defineComponent({
     }
 
     &__title {
-      font-size: 22px;
+      font-size: 20px;
+      margin-bottom: 20px;
+      &::before {
+        margin-right: 10px;
+      }
+
+      &::after {
+        margin-left: 10px;
+      }
     }
   }
 }

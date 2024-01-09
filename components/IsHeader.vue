@@ -258,6 +258,7 @@ export default defineComponent({
       display: flex;
       justify-content: center;
       align-items: center;
+      font-family: inherit;
 
       font-size: 12px;
       background-color: var(--light);

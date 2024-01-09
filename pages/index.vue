@@ -76,6 +76,7 @@ export default defineComponent({
         </template>
         <template v-slot:bottom>
           <is-cart-price-block
+            style="margin-top: auto"
             @back="closeCartModal"
             @next="closeCartModal(), openOrderModal()"
           />
@@ -92,7 +93,7 @@ export default defineComponent({
                 <is-checkbox-field>
                   <template #checkbox> <is-checkbox /> </template>
                   <template #icon>
-                    <svg width="30" height="30">
+                    <svg>
                       <use xlink:href="@/assets/images/sprite.svg#deliver" />
                     </svg>
                   </template>
@@ -102,7 +103,7 @@ export default defineComponent({
                 <is-checkbox-field>
                   <template #checkbox> <is-checkbox /> </template>
                   <template #icon>
-                    <svg width="30" height="30">
+                    <svg>
                       <use xlink:href="@/assets/images/sprite.svg#bag" />
                     </svg>
                   </template>
@@ -164,7 +165,6 @@ export default defineComponent({
               <template #middle>
                 <ul class="order-table list-reset">
                   <li class="order-table__item">
-                    <div class="order-table__item-title">Cтоимость товаров</div>
                     <div class="order-table__item-title">Cтоимость товаров</div>
                     <div class="order-table__item-price">450 ₽</div>
                   </li>
@@ -282,6 +282,7 @@ export default defineComponent({
   font-size: 12px;
   font-style: normal;
   font-weight: 300;
+  font-family: var(--ubuntu);
 
   &__link {
     color: #185598;
@@ -291,5 +292,42 @@ export default defineComponent({
 .msg-error {
   color: red;
   font-family: var(--ubuntu);
+}
+
+@media (max-width: 520px) {
+  .checkbox-field-percent {
+    & p:first-child {
+      font-size: 10px;
+    }
+    & p:last-child {
+      display: none;
+    }
+  }
+
+  .order-table {
+    padding: 0 0px 20px 0;
+    margin-top: -20px;
+    &__item {
+      grid-template-columns: none;
+      gap: 20px;
+      &-title {
+        font-size: 14px;
+      }
+      &-price {
+        font-size: 14px;
+      }
+
+      &:first-child {
+        padding-bottom: 10px;
+      }
+    }
+  }
+
+  .msg-error {
+    font-size: 12px;
+  }
+  .order-button {
+    font-size: 14px !important;
+  }
 }
 </style>

@@ -55,4 +55,11 @@ span::before {
 .custom-radio:disabled + span::before {
   background-color: var(--light);
 }
+
+@media (max-width: 520px) {
+  span::before {
+    width: 26px;
+    height: 26px;
+  }
+}
 </style>

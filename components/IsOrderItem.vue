@@ -85,7 +85,7 @@ export default defineComponent({
       font-size: 14px;
     }
     &__title {
-      font-size: 16px;
+      font-size: 14px;
       padding-right: 0;
     }
   }

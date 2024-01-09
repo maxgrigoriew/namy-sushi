@@ -25,5 +25,6 @@ export default defineComponent({
   flex-direction: column;
   overflow-y: auto;
   gap: 5px;
+  padding: 10px;
 }
 </style>
