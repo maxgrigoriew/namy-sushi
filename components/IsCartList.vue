@@ -1,13 +1,22 @@
 <script>
-export default {}
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  props: {
+    favorites: {
+      type: Array,
+    },
+  },
+})
 </script>
 <template>
   <ul class="cart-list list-reset">
     <is-cart-list-item
-      v-for="item in 10"
-      :key="item"
+      :favorite="favorite"
+      v-for="favorite in favorites"
+      :key="favorite.id"
       class="cart__list-item"
-    ></is-cart-list-item>
+    />
   </ul>
 </template>
 <style lang="scss">

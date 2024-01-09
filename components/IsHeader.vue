@@ -4,7 +4,11 @@ import menu from './../data/menu'
 
 export default defineComponent({
   emits: 'click',
-
+  props: {
+    favoriteCount: {
+      type: Number,
+    },
+  },
   setup() {
     const menuRef = ref(null)
     const isOpenMenu = ref(false)
@@ -123,6 +127,7 @@ export default defineComponent({
                   fill="#212121"
                 />
               </svg>
+              <span class="header__buttons-count">{{ favoriteCount }}</span>
             </template>
           </is-button>
           <is-button>Войти</is-button>
@@ -240,6 +245,22 @@ export default defineComponent({
 
     &--mobile {
       display: none;
+    }
+
+    &-count {
+      position: absolute;
+      display: block;
+      border-radius: 50%;
+      top: -10px;
+      right: -10px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 12px;
+      background-color: var(--light);
     }
   }
 }

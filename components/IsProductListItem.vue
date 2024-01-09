@@ -20,12 +20,17 @@ export default {
     }
 
     const changeIsCart = () => (isCart.value = !isCart.value)
+    const addCategory = (category) => {
+      console.log('add catigory')
+      emit('addCategory', category)
+    }
     return {
       isCart,
       changeIsCart,
       incrementCount,
       decrementCount,
       count,
+      addCategory,
     }
   },
 }
@@ -48,46 +53,22 @@ export default {
         v-if="isCart"
         class="product-item__button"
         is-rectangle
-        @click="changeIsCart(), incrementCount()"
+        @click="changeIsCart(), incrementCount(), addCategory(category)"
         >В корзину</is-button
       >
       <div v-else class="product-item__counters">
         <is-button class="product-item__increment" @click="decrementCount">
           <template v-slot:icon>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                d="M13.3333 8.00012H2.66666"
-                stroke="#2A344A"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+            <svg width="16" height="16">
+              <use xlink:href="@/assets/images/sprite.svg#minus" />
             </svg>
           </template>
         </is-button>
         <span class="product-item__count">{{ count }}</span>
         <is-button class="product-item__decrement" @click="incrementCount">
           <template v-slot:icon>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                d="M11.5556 8.0001H4.44446M8.00001 11.5556V4.44446"
-                stroke="#2A344A"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+            <svg width="16" height="16">
+              <use xlink:href="@/assets/images/sprite.svg#plus" />
             </svg>
           </template>
         </is-button>

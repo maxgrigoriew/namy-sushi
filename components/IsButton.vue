@@ -24,7 +24,6 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: 'click',
   setup(_, { slots }) {
     const showIcon = computed(() => !!slots.icon)
     onMounted(() => {})
@@ -54,6 +53,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .btn {
   display: inline-flex;
+  position: relative;
   padding: 13px 30px;
   align-items: center;
   justify-content: center;

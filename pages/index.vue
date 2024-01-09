@@ -1,5 +1,5 @@
 <script>
-import { ref, defineComponent, reactive } from 'vue'
+import { ref, defineComponent, reactive, computed } from 'vue'
 import { required, email, minLength } from 'vuelidate/lib/validators'
 import categories from '@/data/categories'
 
@@ -21,6 +21,8 @@ export default defineComponent({
   setup() {
     const cartRef = ref(null)
     const orderRef = ref(null)
+    const favoriteCategories = ref([])
+    const favoriteCount = computed(() => favoriteCategories.value.length)
     const orderForm = reactive({
       user: '',
       phone: '',
@@ -38,6 +40,10 @@ export default defineComponent({
     const openOrderModal = () => {
       orderRef.value.open()
     }
+
+    const addCategory = (category) => {
+      favoriteCategories.value.push(category)
+    }
     return {
       orderForm,
       orderRef,
@@ -47,6 +53,9 @@ export default defineComponent({
       openOrderModal,
       toggleCartModal,
       categories,
+      favoriteCategories,
+      favoriteCount,
+      addCategory,
     }
   },
 })
@@ -54,16 +63,16 @@ export default defineComponent({
 
 <template>
   <div class="page">
-    <is-header @openModal="toggleCartModal" />
+    <is-header @openModal="toggleCartModal" :favoriteCount="favoriteCount" />
     <div class="container">
       <is-menu-tab class="tab-menu" />
-      <is-product-list :categories="categories" />
+      <is-product-list :categories="categories" @addCategory="addCategory" />
       <is-scroll-button v-scroll-to-top />
 
       <is-modal ref="cartRef">
         <template v-slot:header>Корзина</template>
         <template v-slot:middle>
-          <is-cart-list />
+          <is-cart-list :favorites="favoriteCategories" />
         </template>
         <template v-slot:bottom>
           <is-cart-price-block

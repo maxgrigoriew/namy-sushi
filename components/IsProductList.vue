@@ -7,14 +7,22 @@ export default defineComponent({
       type: Array,
     },
   },
-  setup() {
-    return {}
+  setup(_, { emit }) {
+    const addCategory = (category) => {
+      console.log(category)
+      emit('addCategory', category)
+    }
+
+    return {
+      addCategory,
+    }
   },
 })
 </script>
 <template>
   <ul class="product list-reset">
     <is-product-list-item
+      @addCategory="addCategory"
       :category="item"
       v-for="item in categories"
       :key="item.id"

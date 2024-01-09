@@ -3,8 +3,7 @@ import { ref } from 'vue'
 
 export default {
   props: {},
-  emits: 'click',
-  setup(props, { emit }) {
+  setup(props) {
     const isCart = ref(true)
     const count = ref(0)
     const incrementCount = () => {

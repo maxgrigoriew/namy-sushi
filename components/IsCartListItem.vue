@@ -2,8 +2,12 @@
 import { ref } from 'vue'
 
 export default {
-  props: {},
-  setup(props, { emit }) {
+  props: {
+    favorite: {
+      type: Object,
+    },
+  },
+  setup(_, { emit }) {
     const isCart = ref(true)
     const count = ref(0)
     const incrementCount = () => {
@@ -31,56 +35,36 @@ export default {
     <img class="cart-item__img" src="./../assets/images/product-1.png" alt="" />
     <div class="cart-item__content">
       <div class="cart-item__top">
-        <span class="cart-item__title">ролл ясай</span>
+        <span class="cart-item__title">{{ favorite.title }}</span>
       </div>
       <p class="cart-item__text">
-        Огурец, авокадо, помидор, болгарский перец, листья салата, кунжут
+        {{ favorite.info }}
       </p>
     </div>
     <div class="cart-item__bottom">
-      <p class="cart-item__price"><span>Цена</span><span>120 ₽</span></p>
+      <p class="cart-item__price">
+        <span>Цена</span><span>{{ favorite.price }} ₽</span>
+      </p>
       <div class="cart-item__counters">
         <is-button class="cart-item__increment" @click="decrementCount">
           <template v-slot:icon>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                d="M13.3333 8.00012H2.66666"
-                stroke="#2A344A"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+            <svg width="16" height="16">
+              <use xlink:href="@/assets/images/sprite.svg#minus" />
             </svg>
           </template>
         </is-button>
         <span class="cart-item__count">{{ count }}</span>
         <is-button class="cart-item__decrement" @click="incrementCount">
           <template v-slot:icon>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                d="M11.5556 8.0001H4.44446M8.00001 11.5556V4.44446"
-                stroke="#2A344A"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+            <svg width="16" height="16">
+              <use xlink:href="@/assets/images/sprite.svg#plus" />
             </svg>
           </template>
         </is-button>
       </div>
-      <p class="cart-item__price"><span>Сумма</span><span>200 ₽</span></p>
+      <p class="cart-item__price">
+        <span>Сумма</span><span>{{ favorite.price }} ₽</span>
+      </p>
     </div>
     <button is-dark class="cart-item__delete">
       <svg
