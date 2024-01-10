@@ -1,5 +1,5 @@
 <script>
-import { ref, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   props: {
@@ -7,31 +7,10 @@ export default defineComponent({
       type: Object,
     },
   },
-  setup(_, { emit }) {
-    const isCart = ref(true)
-    const count = ref(0)
-    const incrementCount = () => {
-      count.value++
-    }
-    const decrementCount = () => {
-      if (count.value > 0) {
-        count.value--
-      }
-    }
-
-    const changeIsCart = () => (isCart.value = !isCart.value)
-    return {
-      isCart,
-      changeIsCart,
-      incrementCount,
-      decrementCount,
-      count,
-    }
-  },
 })
 </script>
 <template>
-  <li class="cart-item" :class="{ active: count > 0 }">
+  <li class="cart-item">
     <img
       class="cart-item__img"
       :src="require(`@/assets/images/${favorite.img}`)"
@@ -51,15 +30,21 @@ export default defineComponent({
         <span>Цена</span><span>{{ favorite.price }} ₽</span>
       </p>
       <div class="cart-item__counters">
-        <is-button class="cart-item__increment" @click="decrementCount">
+        <is-button
+          class="cart-item__increment"
+          @click="$emit('decrementCountProduct', favorite.name)"
+        >
           <template v-slot:icon>
             <svg width="16" height="16">
               <use xlink:href="@/assets/images/sprite.svg#minus" />
             </svg>
           </template>
         </is-button>
-        <span class="cart-item__count">{{ count }}</span>
-        <is-button class="cart-item__decrement" @click="incrementCount">
+        <span class="cart-item__count">{{ favorite.count }}</span>
+        <is-button
+          class="cart-item__decrement"
+          @click="$emit('incrementCountProduct', favorite.name)"
+        >
           <template v-slot:icon>
             <svg width="16" height="16">
               <use xlink:href="@/assets/images/sprite.svg#plus" />
@@ -74,7 +59,7 @@ export default defineComponent({
     <button
       is-dark
       class="cart-item__delete"
-      @click="$emit('removeCategory', favorite)"
+      @click="$emit('clearCountProduct', favorite.name)"
     >
       <svg width="16" height="16">
         <use xlink:href="@/assets/images/sprite.svg#backet" />

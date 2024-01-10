@@ -1,33 +1,14 @@
 <script>
-import { ref } from 'vue'
-
 export default {
   props: {
     disabled: {
       type: Boolean,
       default: false,
     },
-  },
-  setup(props) {
-    const isCart = ref(true)
-    const count = ref(0)
-    const incrementCount = () => {
-      count.value++
-    }
-    const decrementCount = () => {
-      if (count.value > 0) {
-        count.value--
-      }
-    }
-
-    const changeIsCart = () => (isCart.value = !isCart.value)
-    return {
-      isCart,
-      changeIsCart,
-      incrementCount,
-      decrementCount,
-      count,
-    }
+    totalAmount: {
+      type: Number,
+      default: 0,
+    },
   },
 }
 </script>
@@ -35,7 +16,7 @@ export default {
   <div class="total-amount">
     <p class="total-amount__price">
       <span class="total-amount__title">Общая сумма</span>
-      <span class="total-amount__sum">16995 ₽</span>
+      <span class="total-amount__sum">{{ totalAmount }} ₽</span>
     </p>
     <p class="total-amount__text">
       Сумма заказа для доставки курьером должна составлять не менее 500 ₽

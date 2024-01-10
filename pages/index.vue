@@ -1,7 +1,6 @@
 <script>
 import { ref, defineComponent, reactive, computed } from 'vue'
 import { required, email, minLength } from 'vuelidate/lib/validators'
-import categories from '@/data/categories'
 
 export default defineComponent({
   validations() {
@@ -21,13 +20,88 @@ export default defineComponent({
   setup() {
     const cartRef = ref(null)
     const orderRef = ref(null)
-    const favoriteCategories = ref([])
-    const favoriteCount = computed(() => favoriteCategories.value.length)
+    const favoriteCount = computed(() => {
+      let count = 0
+      categories.value.forEach(item => {
+        if (item.count) {
+          count += 1
+        }
+      })
+
+      return count
+    })
+
     const orderForm = reactive({
       user: '',
       phone: '',
       info: '',
     })
+    const categories = ref([
+      {
+        id: 'rolly',
+        img: 'product-1.webp',
+        name: 'ТОСУИ',
+        info: 'рис, нори, тобико оранжевая, майонез, салат, паприка, жареная креветка',
+        price: 310,
+        weight: '190',
+        count: 0,
+      },
+      {
+        id: 'rolly',
+        img: 'product-2.webp',
+        name: 'САППОРО',
+        info: 'рис, нори, майонез, томаго , огурец, авокадо, угорь',
+        price: 350,
+        weight: '390',
+        count: 0,
+      },
+      {
+        id: 'rolly',
+        img: 'product-3.webp',
+        name: 'ИНЬ-ЯНЬ',
+        info: 'рис, нори, тунец, паприка, лосось, авокадо',
+        price: 340,
+        weight: '320',
+        count: 0,
+      },
+      {
+        id: 'sushi',
+        img: 'product-4.webp',
+        name: 'Филадельфия',
+        info: 'рис, нори, майонез, краб, огурец, авокадо, тобико оранжева',
+        price: 400,
+        weight: '350',
+        count: 0,
+      },
+      {
+        id: 'sushi',
+        img: 'product-5.webp',
+        name: 'КУНСЕЙ БАТАКОН',
+        info: 'рис, нори, острый соус, помидор, огурец, бекон, копченый лосось',
+        price: 380,
+        weight: '340',
+        count: 0,
+      },
+      {
+        id: 'sets',
+        img: 'product-4.webp',
+        name: 'КАЛИФОРНИЯ',
+        info: 'рис, нори, майонез, краб, огурец, авокадо, тобико оранжева',
+        price: 400,
+        weight: '350',
+        count: 0,
+      },
+      {
+        id: 'sets',
+        img: 'product-5.webp',
+        name: 'Атакама',
+        info: 'рис, нори, острый соус, помидор, огурец, бекон, копченый лосось',
+        price: 380,
+        weight: '340',
+        count: 0,
+      },
+    ])
+
     const openCartModal = () => {
       cartRef.value.open()
     }
@@ -41,14 +115,43 @@ export default defineComponent({
       orderRef.value.open()
     }
 
-    const addCategory = category => {
-      favoriteCategories.value.push(category)
-    }
-    const removeCategory = category => {
-      favoriteCategories.value = favoriteCategories.value.filter(
-        item => category.name !== item.name
+    const incrementCountProduct = name => {
+      const elem = categories.value.find(
+        item => name.toLowerCase() === item.name.toLowerCase()
       )
+      if (elem) {
+        elem.count += 1
+      }
     }
+    const decrementCountProduct = name => {
+      const elem = categories.value.find(
+        item => name.toLowerCase() === item.name.toLowerCase()
+      )
+      if (elem) {
+        elem.count -= 1
+      }
+    }
+    const clearCountProduct = name => {
+      const elem = categories.value.find(
+        item => name.toLowerCase() === item.name.toLowerCase()
+      )
+      if (elem) {
+        elem.count = 0
+      }
+    }
+
+    const favoriteCategories = computed(() => {
+      return categories.value.filter(item => item.count !== 0)
+    })
+
+    const totalAmount = computed(() => {
+      let count = 0
+      favoriteCategories.value.forEach(product => {
+        count += product.price * product.count
+      })
+
+      return count
+    })
     return {
       orderForm,
       orderRef,
@@ -58,10 +161,12 @@ export default defineComponent({
       openOrderModal,
       toggleCartModal,
       categories,
-      favoriteCategories,
       favoriteCount,
-      addCategory,
-      removeCategory,
+      decrementCountProduct,
+      incrementCountProduct,
+      favoriteCategories,
+      clearCountProduct,
+      totalAmount,
     }
   },
 })
@@ -74,8 +179,8 @@ export default defineComponent({
       <is-menu-tab class="tab-menu" />
       <is-product-list
         :categories="categories"
-        @addCategory="addCategory"
-        @removeCategory="removeCategory"
+        @decrementCountProduct="decrementCountProduct"
+        @incrementCountProduct="incrementCountProduct"
       />
       <is-scroll-button v-scroll-to-top />
 
@@ -85,9 +190,11 @@ export default defineComponent({
           <is-cart-list
             v-if="favoriteCategories.length"
             :favorites="favoriteCategories"
-            @removeCategory="removeCategory"
+            @decrementCountProduct="decrementCountProduct"
+            @incrementCountProduct="incrementCountProduct"
+            @clearCountProduct="clearCountProduct"
           />
-          <div style="text-align: center" v-else>Список пуст</div>
+          <div style="text-align: center" v-else>Корзина пуста</div>
         </template>
         <template v-slot:bottom>
           <is-cart-price-block
@@ -95,6 +202,7 @@ export default defineComponent({
             @back="closeCartModal"
             @next="closeCartModal(), openOrderModal()"
             :disabled="!favoriteCount"
+            :totalAmount="totalAmount"
           />
         </template>
       </is-modal>

@@ -9,38 +9,14 @@ export default defineComponent({
   },
   setup(_, { emit }) {
     const isCart = ref(true)
-    const productCounter = ref(0)
-    const incrementCount = () => {
-      productCounter.value++
-    }
-    const decrementCount = () => {
-      if (productCounter.value > 0) {
-        productCounter.value--
-      }
-    }
-
-    const addCategory = category => {
-      emit('addCategory', category)
-    }
-    const removeCategory = category => {
-      if (productCounter.value === 0) {
-        emit('removeCategory', category)
-      }
-    }
-
     return {
       isCart,
-      incrementCount,
-      decrementCount,
-      productCounter,
-      addCategory,
-      removeCategory,
     }
   },
 })
 </script>
 <template>
-  <li class="product-item" :class="{ active: productCounter > 0 }">
+  <li class="product-item" :class="{ active: category.count > 0 }">
     <div class="product-item__img">
       <img
         :src="require(`@/assets/images/${category.img}`)"
@@ -57,16 +33,16 @@ export default defineComponent({
     <div class="product-item__bottom">
       <span class="product-item__price">{{ category.price }} ₽</span>
       <is-button
-        v-if="!productCounter"
+        v-if="!category.count"
         class="product-item__button"
         is-rectangle
-        @click="incrementCount(), addCategory(category)"
+        @click="$emit('incrementCountProduct', category.name)"
         >В корзину</is-button
       >
       <div v-else class="product-item__counters">
         <is-button
           class="product-item__increment"
-          @click="decrementCount(), removeCategory(category)"
+          @click="$emit('decrementCountProduct', category.name)"
         >
           <template v-slot:icon>
             <svg width="16" height="16">
@@ -74,8 +50,11 @@ export default defineComponent({
             </svg>
           </template>
         </is-button>
-        <span class="product-item__count">{{ productCounter }}</span>
-        <is-button class="product-item__decrement" @click="incrementCount">
+        <span class="product-item__count">{{ category.count }}</span>
+        <is-button
+          class="product-item__decrement"
+          @click="$emit('incrementCountProduct')"
+        >
           <template v-slot:icon>
             <svg width="16" height="16">
               <use xlink:href="@/assets/images/sprite.svg#plus" />

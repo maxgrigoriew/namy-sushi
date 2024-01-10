@@ -7,28 +7,14 @@ export default defineComponent({
       type: Array,
     },
   },
-  setup(_, { emit }) {
-    const addCategory = category => {
-      emit('addCategory', category)
-    }
-
-    const removeCategory = category => {
-      emit('removeCategory', category)
-    }
-
-    return {
-      addCategory,
-      removeCategory,
-    }
-  },
 })
 </script>
 <template>
   <div>
     <ul class="product list-reset">
       <is-product-list-item
-        @addCategory="addCategory"
-        @removeCategory="removeCategory"
+        @incrementCountProduct="$emit('incrementCountProduct', item.name)"
+        @decrementCountProduct="$emit('decrementCountProduct', item.name)"
         :category="item"
         v-for="item in categories"
         :key="item.id"

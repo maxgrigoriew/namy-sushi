@@ -13,7 +13,9 @@ export default defineComponent({
   <ul class="cart-list list-reset">
     <is-cart-list-item
       :favorite="favorite"
-      @removeCategory="$emit('removeCategory', favorite)"
+      @incrementCountProduct="$emit('incrementCountProduct', favorite.name)"
+      @decrementCountProduct="$emit('decrementCountProduct', favorite.name)"
+      @clearCountProduct="$emit('clearCountProduct', favorite.name)"
       v-for="favorite in favorites"
       :key="favorite.id"
       class="cart__list-item"
