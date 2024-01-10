@@ -133,9 +133,7 @@ export default defineComponent({
     const openCartModal = () => {
       cartRef.value.open()
     }
-    const toggleCartModal = () => {
-      cartRef.value.toggle()
-    }
+
     const closeCartModal = () => {
       cartRef.value.close()
     }
@@ -198,7 +196,6 @@ export default defineComponent({
       openCartModal,
       closeCartModal,
       openOrderModal,
-      toggleCartModal,
       categories,
       favoriteCount,
       decrementCountProduct,
@@ -216,7 +213,7 @@ export default defineComponent({
 
 <template>
   <div class="page">
-    <is-header @openModal="toggleCartModal" :favoriteCount="favoriteCount" />
+    <is-header @openModal="openCartModal" :favoriteCount="favoriteCount" />
     <div class="container">
       <is-menu-tab
         class="tab-menu"

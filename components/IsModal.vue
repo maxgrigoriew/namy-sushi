@@ -4,22 +4,17 @@ import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup(_, { expose }) {
     const isOpenModal = ref(false)
-    const toggle = () => {
-      document.querySelector('body').classList.toggle('active')
-      isOpenModal.value = true
-    }
+
     const open = () => (isOpenModal.value = true)
     const close = () => {
-      document.querySelector('body').classList.remove('active')
       isOpenModal.value = false
     }
 
-    expose({ close, open, toggle })
+    expose({ close, open })
     return {
       isOpenModal,
       close,
       open,
-      toggle,
     }
   },
 })
