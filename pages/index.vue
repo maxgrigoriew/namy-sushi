@@ -140,6 +140,9 @@ export default defineComponent({
     const openOrderModal = () => {
       orderRef.value.open()
     }
+    const closeOrderModal = () => {
+      orderRef.value.close()
+    }
 
     const incrementCountProduct = name => {
       const elem = categories.value.find(
@@ -175,12 +178,9 @@ export default defineComponent({
     })
 
     const totalAmount = computed(() => {
-      let count = 0
-      favoriteCategories.value.forEach(product => {
-        count += product.price * product.count
-      })
-
-      return count
+      return favoriteCategories.value.reduce((acc, product) => {
+        return acc + product.price * product.count
+      }, 0)
     })
 
     const filterSelectedCategory = computed(() => {
@@ -206,6 +206,7 @@ export default defineComponent({
       filterSelectedCategory,
       selectedCategory,
       changeActiveTab,
+      closeOrderModal,
     }
   },
 })
@@ -348,6 +349,7 @@ export default defineComponent({
                   is-fill
                   is-rectangle
                   is-blue
+                  @click="closeOrderModal"
                   >Купить и оплатить</is-button
                 >
 
