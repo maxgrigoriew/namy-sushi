@@ -21,7 +21,6 @@ export default defineComponent({
         >1</is-product-list-item
       >
     </ul>
-    asd
   </div>
 </template>
 <style lang="scss">

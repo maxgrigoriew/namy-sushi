@@ -27,7 +27,7 @@ export default defineComponent({
 </template>
 <style lang="scss">
 .scroll-btn {
-  position: fixed;
+  position: fixed !important;
   right: 10%;
   bottom: 160px;
 }

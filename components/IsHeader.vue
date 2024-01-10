@@ -288,7 +288,7 @@ export default defineComponent({
       position: fixed;
       left: -100%;
       width: 100%;
-      top: 65px;
+      top: 64px;
       transition: var(--transition);
       bottom: 0;
       background-color: var(--blue);

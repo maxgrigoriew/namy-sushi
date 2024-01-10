@@ -2,6 +2,12 @@
 import { defineComponent } from 'vue'
 import tabs from '~/data/tabs'
 export default defineComponent({
+  props: {
+    selectedCategory: {
+      type: String,
+      required: true,
+    },
+  },
   setup() {
     return {
       tabs,
@@ -17,9 +23,10 @@ export default defineComponent({
         <is-button
           is-large
           class="menu__list-btn"
-          :class="{ active: tab.name === 'Роллы' }"
-          >{{ tab.name }}</is-button
-        >
+          :class="{ active: tab.category === selectedCategory }"
+          @click="$emit('changeTab', tab.category)"
+          >{{ tab.name }}
+        </is-button>
       </li>
     </ul>
   </div>

@@ -19,6 +19,7 @@ export default defineComponent({
   },
   setup() {
     const cartRef = ref(null)
+    const selectedCategory = ref('rolly')
     const orderRef = ref(null)
     const favoriteCount = computed(() => {
       let count = 0
@@ -84,7 +85,7 @@ export default defineComponent({
       },
       {
         id: 'sets',
-        img: 'product-4.webp',
+        img: 'product-6.webp',
         name: 'КАЛИФОРНИЯ',
         info: 'рис, нори, майонез, краб, огурец, авокадо, тобико оранжева',
         price: 400,
@@ -93,9 +94,36 @@ export default defineComponent({
       },
       {
         id: 'sets',
-        img: 'product-5.webp',
-        name: 'Атакама',
-        info: 'рис, нори, острый соус, помидор, огурец, бекон, копченый лосось',
+        img: 'product-7.webp',
+        name: 'Европа',
+        info: 'рис, нори, майонез, краб, огурец, авокадо, тобико оранжева',
+        price: 320,
+        weight: '330',
+        count: 0,
+      },
+      {
+        id: 'rice_noodles',
+        img: 'product-8.webp',
+        name: 'СВИНИНА В ОСТРОМ СОУСЕ',
+        info: 'свинина, фирменный сычуаньский соус',
+        price: 269,
+        weight: '340',
+        count: 0,
+      },
+      {
+        id: 'salads',
+        img: 'product-9.webp',
+        name: 'Салат Курица с ананасом',
+        info: 'помидор, огурец, бекон, копченый лосось',
+        price: 169,
+        weight: '340',
+        count: 0,
+      },
+      {
+        id: 'hot_food',
+        img: 'product-10.webp',
+        name: 'ТИГРОВЫЕ КРЕВЕТКИ ПО-КРЕОЛЬСКИ',
+        info: 'Тигровые Креветки по-креольски ( в соусе шрирача) 10 шт.',
         price: 380,
         weight: '340',
         count: 0,
@@ -140,6 +168,10 @@ export default defineComponent({
       }
     }
 
+    const changeActiveTab = tab => {
+      selectedCategory.value = tab
+    }
+
     const favoriteCategories = computed(() => {
       return categories.value.filter(item => item.count !== 0)
     })
@@ -152,6 +184,13 @@ export default defineComponent({
 
       return count
     })
+
+    const filterSelectedCategory = computed(() => {
+      return categories.value.filter(
+        item => item.id.toLowerCase() === selectedCategory.value
+      )
+    })
+
     return {
       orderForm,
       orderRef,
@@ -167,6 +206,9 @@ export default defineComponent({
       favoriteCategories,
       clearCountProduct,
       totalAmount,
+      filterSelectedCategory,
+      selectedCategory,
+      changeActiveTab,
     }
   },
 })
@@ -176,9 +218,13 @@ export default defineComponent({
   <div class="page">
     <is-header @openModal="toggleCartModal" :favoriteCount="favoriteCount" />
     <div class="container">
-      <is-menu-tab class="tab-menu" />
+      <is-menu-tab
+        class="tab-menu"
+        @changeTab="changeActiveTab"
+        :selectedCategory="selectedCategory"
+      />
       <is-product-list
-        :categories="categories"
+        :categories="filterSelectedCategory"
         @decrementCountProduct="decrementCountProduct"
         @incrementCountProduct="incrementCountProduct"
       />
@@ -325,6 +371,7 @@ export default defineComponent({
 
 <style lang="scss">
 .page {
+  min-height: 100vh;
   padding-bottom: 160px;
 
   position: relative;
